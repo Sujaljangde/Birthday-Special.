@@ -122,6 +122,36 @@
         border-radius: 50%;
       }
 
+      /* Audio Controls */
+      .audio-controls {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        padding: 10px;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .audio-controls button {
+        background: none;
+        border: 2px solid white;
+        color: white;
+        font-size: 1.2rem;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      .audio-controls button:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
         .birthday-title {
@@ -140,6 +170,11 @@
         .Picture-note-video {
           width: 200px;
           font-size: 1.3rem;
+        }
+
+        .audio-controls {
+          top: 15px;
+          left: 15px;
         }
       }
 
@@ -191,6 +226,20 @@
     </style>
   </head>
   <body>
+    <!-- Background Audio -->
+    <audio id="backgroundMusic" loop preload="auto">
+      <source src="Gulabo.mp3" type="audio/mpeg" />
+      <!-- Fallback for different audio formats -->
+      <source src="Gulabo.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- Audio Controls -->
+    <div class="audio-controls">
+      <button id="playPauseBtn">🎵 Pause</button>
+      <button id="volumeBtn">🔊</button>
+    </div>
+
     <div class="start-overlay">
       <div class="start-message">
         <h1>Birthday Surprise!</h1>
@@ -321,7 +370,6 @@
       </div>
 
       <!-- First Birthday video -->
-     
 
       <!-- Second Birthday video -->
       <div class="Picture-video">
@@ -340,8 +388,7 @@
         </div>
       </div>
 
-
-       <div class="Picture-video">
+      <div class="Picture-video">
         <video class="Picture-img-video" width="300" height="400" controls>
           <source src="Snapchat-1356592373.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -363,6 +410,40 @@
       const startOverlay = document.querySelector(".start-overlay");
       const birthdayTitle = document.querySelector(".birthday-title");
       const container = document.querySelector(".Container");
+      const backgroundMusic = document.getElementById("backgroundMusic");
+      const audioControls = document.querySelector(".audio-controls");
+      const playPauseBtn = document.getElementById("playPauseBtn");
+      const volumeBtn = document.getElementById("volumeBtn");
+
+      // Audio control functionality
+      let isMuted = false;
+      let previousVolume = 0.7;
+
+      // Set initial volume
+      backgroundMusic.volume = 0.7;
+
+      playPauseBtn.addEventListener("click", () => {
+        if (backgroundMusic.paused) {
+          backgroundMusic.play();
+          playPauseBtn.textContent = "🎵 Pause";
+        } else {
+          backgroundMusic.pause();
+          playPauseBtn.textContent = "▶ Play";
+        }
+      });
+
+      volumeBtn.addEventListener("click", () => {
+        if (isMuted) {
+          backgroundMusic.volume = previousVolume;
+          volumeBtn.textContent = "🔊";
+          isMuted = false;
+        } else {
+          previousVolume = backgroundMusic.volume;
+          backgroundMusic.volume = 0;
+          volumeBtn.textContent = "🔇";
+          isMuted = true;
+        }
+      });
 
       // Drag functionality
       function updateElementPosition(element, event) {
@@ -553,12 +634,26 @@
           },
         });
 
+        // Start background music
+        backgroundMusic.play().catch((error) => {
+          console.warn("Audio autoplay was prevented:", error);
+          // Show a subtle notification that music didn't start
+        });
+
         // Make main content visible
         birthdayTitle.style.visibility = "visible";
         container.style.visibility = "visible";
+        audioControls.style.visibility = "visible";
 
-        // Show birthday title first, then start photo animations
+        // Show birthday title and audio controls
         gsap.to(".birthday-title", {
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
+          delay: 0.5,
+        });
+
+        gsap.to(".audio-controls", {
           opacity: 1,
           duration: 1,
           ease: "power3.out",
@@ -570,7 +665,18 @@
       }
 
       startOverlay.addEventListener("click", startExperience);
+
+      // Handle audio loading errors
+      backgroundMusic.addEventListener("error", (e) => {
+        console.warn("Could not load background music:", e);
+        playPauseBtn.textContent = "🚫 No Audio";
+        playPauseBtn.disabled = true;
+      });
+
+      // Update button text when audio ends (though it's set to loop)
+      backgroundMusic.addEventListener("ended", () => {
+        playPauseBtn.textContent = "▶ Play";
+      });
     </script>
   </body>
 </html>
-
