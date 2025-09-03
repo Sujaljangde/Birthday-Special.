@@ -152,6 +152,90 @@
         background-color: rgba(255, 255, 255, 0.3);
       }
 
+      /* Sparkle Animation Styles */
+      .sparkles-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 5;
+        overflow: hidden;
+      }
+
+      .sparkle {
+        position: absolute;
+        color: #fff;
+        font-size: 20px;
+        opacity: 0;
+        pointer-events: none;
+        text-shadow: 0 0 6px currentColor;
+      }
+
+      .sparkle.gold {
+        color: #ffd700;
+      }
+      .sparkle.pink {
+        color: #ff69b4;
+      }
+      .sparkle.blue {
+        color: #87ceeb;
+      }
+      .sparkle.white {
+        color: #ffffff;
+      }
+      .sparkle.yellow {
+        color: #ffff00;
+      }
+      .sparkle.purple {
+        color: #dda0dd;
+      }
+
+      /* Falling sparkles */
+      @keyframes fallAndFade {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px) scale(0);
+        }
+        10% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        90% {
+          opacity: 1;
+          transform: translateY(100vh) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(120vh) scale(0);
+        }
+      }
+
+      /* Floating sparkles */
+      @keyframes floatAndTwinkle {
+        0% {
+          opacity: 0;
+          transform: translateY(0) scale(0) rotate(0deg);
+        }
+        20% {
+          opacity: 1;
+          transform: translateY(-20px) scale(1) rotate(90deg);
+        }
+        50% {
+          opacity: 0.8;
+          transform: translateY(-40px) scale(1.2) rotate(180deg);
+        }
+        80% {
+          opacity: 0.6;
+          transform: translateY(-60px) scale(0.8) rotate(270deg);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-80px) scale(0) rotate(360deg);
+        }
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
         .birthday-title {
@@ -175,6 +259,10 @@
         .audio-controls {
           top: 15px;
           left: 15px;
+        }
+
+        .sparkle {
+          font-size: 16px;
         }
       }
 
@@ -226,6 +314,9 @@
     </style>
   </head>
   <body>
+    <!-- Sparkles Container -->
+    <div class="sparkles-container" id="sparklesContainer"></div>
+
     <!-- Background Audio -->
     <audio id="backgroundMusic" loop preload="auto">
       <source src="Gulabo.mp3" type="audio/mpeg" />
@@ -248,7 +339,9 @@
       </div>
     </div>
 
-    <div class="birthday-title">🎉 HAPPIEST BIRTHDAY GULABOOOOOOOOO💃!!! 🎉</div>
+    <div class="birthday-title">
+      🎉 HAPPIEST BIRTHDAY GULABOOOOOOOOO💃!!! 🎉
+    </div>
 
     <div class="Container">
       <!-- Photo cards -->
@@ -414,13 +507,172 @@
       const audioControls = document.querySelector(".audio-controls");
       const playPauseBtn = document.getElementById("playPauseBtn");
       const volumeBtn = document.getElementById("volumeBtn");
+      const sparklesContainer = document.getElementById("sparklesContainer");
 
       // Audio control functionality
       let isMuted = false;
       let previousVolume = 0.7;
+      let sparkleInterval;
 
       // Set initial volume
       backgroundMusic.volume = 0.7;
+
+      // Sparkle creation and animation functions
+      function createSparkle() {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+
+        // Random sparkle symbols
+        const sparkleSymbols = [
+          "✨",
+          "⭐",
+          "🌟",
+          "💫",
+          "✦",
+          "❋",
+          "❄️",
+          "🎉",
+          "🎊",
+        ];
+        sparkle.textContent =
+          sparkleSymbols[Math.floor(Math.random() * sparkleSymbols.length)];
+
+        // Random colors
+        const colors = ["gold", "pink", "blue", "white", "yellow", "purple"];
+        sparkle.classList.add(
+          colors[Math.floor(Math.random() * colors.length)]
+        );
+
+        // Random position
+        sparkle.style.left = Math.random() * 100 + "vw";
+        sparkle.style.top = Math.random() * 100 + "vh";
+
+        // Random size
+        const size = Math.random() * 15 + 15; // 15px to 30px
+        sparkle.style.fontSize = size + "px";
+
+        sparklesContainer.appendChild(sparkle);
+
+        // Choose random animation type
+        const animationType =
+          Math.random() > 0.5 ? "fallAndFade" : "floatAndTwinkle";
+        const duration = Math.random() * 3 + 2; // 2-5 seconds
+
+        sparkle.style.animation = `${animationType} ${duration}s ease-out forwards`;
+
+        // Remove sparkle after animation
+        setTimeout(() => {
+          if (sparkle.parentNode) {
+            sparkle.parentNode.removeChild(sparkle);
+          }
+        }, duration * 1000);
+      }
+
+      function createFallingSparkle() {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+
+        const sparkleSymbols = ["✨", "⭐", "🌟", "💫", "✦"];
+        sparkle.textContent =
+          sparkleSymbols[Math.floor(Math.random() * sparkleSymbols.length)];
+
+        const colors = ["gold", "pink", "blue", "white", "yellow"];
+        sparkle.classList.add(
+          colors[Math.floor(Math.random() * colors.length)]
+        );
+
+        // Start from top of screen
+        sparkle.style.left = Math.random() * 100 + "vw";
+        sparkle.style.top = "-50px";
+
+        const size = Math.random() * 10 + 20;
+        sparkle.style.fontSize = size + "px";
+
+        sparklesContainer.appendChild(sparkle);
+
+        const duration = Math.random() * 2 + 3; // 3-5 seconds
+        sparkle.style.animation = `fallAndFade ${duration}s linear forwards`;
+
+        setTimeout(() => {
+          if (sparkle.parentNode) {
+            sparkle.parentNode.removeChild(sparkle);
+          }
+        }, duration * 1000);
+      }
+
+      function createBurstSparkles(x, y) {
+        for (let i = 0; i < 8; i++) {
+          const sparkle = document.createElement("div");
+          sparkle.className = "sparkle";
+
+          const sparkleSymbols = ["✨", "⭐", "🌟", "💫"];
+          sparkle.textContent =
+            sparkleSymbols[Math.floor(Math.random() * sparkleSymbols.length)];
+
+          const colors = ["gold", "pink", "blue", "white"];
+          sparkle.classList.add(
+            colors[Math.floor(Math.random() * colors.length)]
+          );
+
+          sparkle.style.left = x + "px";
+          sparkle.style.top = y + "px";
+          sparkle.style.fontSize = "25px";
+
+          sparklesContainer.appendChild(sparkle);
+
+          // Animate sparkle bursting outward
+          const angle = (i / 8) * 360;
+          const distance = Math.random() * 100 + 50;
+          const duration = 1.5;
+
+          gsap.fromTo(
+            sparkle,
+            {
+              opacity: 0,
+              scale: 0,
+              x: 0,
+              y: 0,
+            },
+            {
+              opacity: 1,
+              scale: 1,
+              x: Math.cos((angle * Math.PI) / 180) * distance,
+              y: Math.sin((angle * Math.PI) / 180) * distance,
+              duration: duration * 0.3,
+              ease: "power2.out",
+            }
+          );
+
+          gsap.to(sparkle, {
+            opacity: 0,
+            scale: 0,
+            duration: duration * 0.7,
+            delay: duration * 0.3,
+            ease: "power2.in",
+            onComplete: () => {
+              if (sparkle.parentNode) {
+                sparkle.parentNode.removeChild(sparkle);
+              }
+            },
+          });
+        }
+      }
+
+      function startSparkleAnimation() {
+        // Create random sparkles every 200-800ms
+        sparkleInterval = setInterval(() => {
+          if (Math.random() > 0.3) {
+            createSparkle();
+          }
+        }, Math.random() * 600 + 200);
+
+        // Create falling sparkles less frequently
+        setInterval(() => {
+          if (Math.random() > 0.6) {
+            createFallingSparkle();
+          }
+        }, Math.random() * 1000 + 500);
+      }
 
       playPauseBtn.addEventListener("click", () => {
         if (backgroundMusic.paused) {
@@ -490,14 +742,20 @@
         picture.addEventListener("mousedown", startFunction);
         picture.addEventListener("touchstart", startFunction);
 
-        // Hover animations
-        picture.addEventListener("mouseenter", () => {
+        // Enhanced hover animations with sparkle burst
+        picture.addEventListener("mouseenter", (e) => {
           gsap.to(picture, {
             scale: 1.05,
             rotation: "+=5",
             duration: 0.3,
             ease: "power2.out",
           });
+
+          // Create sparkle burst on hover
+          const rect = picture.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          createBurstSparkles(centerX, centerY);
         });
 
         picture.addEventListener("mouseleave", () => {
@@ -604,6 +862,12 @@
           duration: 1.2,
           ease: "back.out(1.4)",
           onComplete: () => {
+            // Create celebration sparkles when photo appears
+            const rect = pic.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            createBurstSparkles(centerX, centerY);
+
             // If the animated element is a video card, attempt to play the video
             if (pic.classList.contains("Picture-video")) {
               const video = pic.querySelector("video");
@@ -637,8 +901,10 @@
         // Start background music
         backgroundMusic.play().catch((error) => {
           console.warn("Audio autoplay was prevented:", error);
-          // Show a subtle notification that music didn't start
         });
+
+        // Start sparkle animations
+        startSparkleAnimation();
 
         // Make main content visible
         birthdayTitle.style.visibility = "visible";
@@ -677,7 +943,20 @@
       backgroundMusic.addEventListener("ended", () => {
         playPauseBtn.textContent = "▶ Play";
       });
+
+      // Add click sparkles anywhere on the screen
+      document.addEventListener("click", (e) => {
+        if (e.target !== startOverlay && !startOverlay.contains(e.target)) {
+          createBurstSparkles(e.clientX, e.clientY);
+        }
+      });
+
+      // Clean up sparkles on page unload
+      window.addEventListener("beforeunload", () => {
+        if (sparkleInterval) {
+          clearInterval(sparkleInterval);
+        }
+      });
     </script>
   </body>
 </html>
-
