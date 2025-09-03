@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BIRTHDAY WISH FROM SUJAL HEHEHE</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Caveat", serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .birthday-title {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .Container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        visibility: hidden;
+      }
+
+      .Picture,
+      .Picture-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border: 8px solid #fff;
+        border-radius: 15px;
+        background: #fff;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        user-select: none;
+        cursor: grab;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3);
+        z-index: 10;
+      }
+
+      .Picture:hover,
+      .Picture-video:hover {
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      .Picture:active,
+      .Picture-video:active {
+        cursor: grabbing;
+        transform: scale(1.05);
+      }
+
+      .Picture-img,
+      .Picture-img-video {
+        display: block;
+        width: 280px;
+        height: 280px;
+        object-fit: cover;
+        pointer-events: none;
+        border-radius: 8px;
+      }
+
+      .Picture-img-video {
+        width: 300px;
+        height: 400px;
+      }
+
+      .Picture-note,
+      .Picture-note-video {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 280px;
+        min-height: 80px;
+        padding: 15px 20px;
+        font-size: 1.6rem;
+        text-align: center;
+        font-weight: 600;
+        color: #333;
+        background: #fff;
+        border-radius: 0 0 8px 8px;
+      }
+
+      .Picture-note-video {
+        width: 300px;
+      }
+
+      .Network,
+      .Network-video {
+        display: inline-block;
+        padding: 0 5px;
+      }
+
+      .Network img,
+      .Network-video img {
+        width: 1.5rem;
+        aspect-ratio: 1 / 1;
+        vertical-align: middle;
+        border-radius: 50%;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .birthday-title {
+          font-size: 1.8rem;
+          top: 15px;
+          right: 15px;
+        }
+
+        .Picture-img,
+        .Picture-img-video {
+          width: 200px;
+          height: 200px;
+        }
+
+        .Picture-note,
+        .Picture-note-video {
+          width: 200px;
+          font-size: 1.3rem;
+        }
+      }
+
+      .start-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        font-family: "Caveat", serif;
+      }
+
+      .start-message h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      .start-message p {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .play-button {
+        font-size: 3rem;
+        width: 100px;
+        height: 100px;
+        border: 3px solid white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+
+      .play-button:hover {
+        transform: scale(1.1);
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="start-overlay">
+      <div class="start-message">
+        <h1>Birthday Surprise!</h1>
+        <p>Click anywhere to begin</p>
+        <div class="play-button">▶</div>
+      </div>
+    </div>
+
+    <div class="birthday-title">🎉 HAPPIEST BIRTHDAY RASMALAIIIII💃!!! 🎉</div>
+
+    <div class="Container">
+      <!-- Photo cards -->
+      <div class="Picture">
+        <img
+          class="Picture-img"
+          src="_choudhary_._____14040603_211012708.jpg"
+          alt="Photo"
+        />
+        <div class="Picture-note"><span> HOT SHAWTY 🔥</span></div>
+      </div>
+
+      <div class="Picture">
+        <img
+          class="Picture-img"
+          src="_choudhary_._____14040605_010326557.jpg"
+          alt="Photo"
+        />
+        <div class="Picture-note"><span>mere bina gayi huh 😤</span></div>
+      </div>
+
+      <div class="Picture">
+        <img
+          class="Picture-img"
+          src="_choudhary_._____14040603_211051706.jpg"
+          alt="Photo"
+        />
+        <div class="Picture-note"><span>Yaha mai pighal gaya! </span></div>
+      </div>
+
+      <div class="Picture">
+        <img
+          class="Picture-img"
+          src="_choudhary_._____14040603_211006191.jpg"
+          alt="Photo"
+        />
+        <div class="Picture-note"><span>AREE SARRRR!!!! 🤩</span></div>
+      </div>
+
+      <div class="Picture">
+        <img
+          class="Picture-img"
+          src="IMG_20250614_155502_947.jpg"
+          alt="Photo"
+        />
+        <div class="Picture-note"><span>EHEHEHEHEE 😂</span></div>
+      </div>
+
+      <div class="Picture">
+        <img
+          class="Picture-img"
+          src="_choudhary_._____14040603_211104214.jpg"
+          alt="Photo"
+        />
+        <div class="Picture-note"><span>slaying in beach huh 🏖️</span></div>
+      </div>
+
+      <div class="Picture">
+        <img
+          class="Picture-img"
+          src="IMG_20250828_183001_576.jpg"
+          alt="Photo"
+        />
+        <div class="Picture-note">
+          <span>DHOKKAA diaa bc aaaaa 😭</span>
+        </div>
+      </div>
+
+      <div class="Picture">
+        <img
+          class="Picture-img"
+          src="IMG_20250828_182742_373.jpg"
+          alt="Photo"
+        />
+        <div class="Picture-note"><span>matkna jaruri haii 💃</span></div>
+      </div>
+
+      <div class="Picture">
+        <img
+          class="Picture-img"
+          src="IMG_20250512_190649_163.jpg"
+          alt="Photo"
+        />
+        <div class="Picture-note"><span>khud gaye guru lmaooo 😎</span></div>
+      </div>
+
+      <div class="Picture">
+        <img
+          class="Picture-img"
+          src="WhatsApp Image 2025-08-28 at 18.03.53_0c45df62.jpg"
+          alt="Photo"
+        />
+        <div class="Picture-note">
+          <span>OHH BC itte jaldi 20 ka bhi hogya 🎊</span>
+        </div>
+      </div>
+
+      <div class="Picture">
+        <img
+          class="Picture-img"
+          src="IMG_20250419_121442_959.jpg"
+          alt="Photo"
+        />
+        <div class="Picture-note">
+          <span>Agya apun dharti pe bensot!! 👑</span>
+        </div>
+      </div>
+
+      <!-- These three appear last -->
+      <div class="Picture">
+        <img
+          class="Picture-img"
+          src="WhatsApp Image 2025-09-01 at 14.27.10_e403ccde.jpg"
+          alt="Birthday celebration"
+        />
+        <div class="Picture-note">
+          <span>Happiestt Birthday to you!!🥳🎂</span>
+        </div>
+      </div>
+
+      <!-- First Birthday video -->
+      <div class="Picture-video">
+        <video class="Picture-img-video" width="300" height="400" controls>
+          <source src="Snapchat-1356592373.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="Picture-note-video">
+          <span>
+            A Birthday video from me 😂 HAPPIEST BIRTHDAY TO YOU
+            DOMLEEEEE!</span
+          >
+        </div>
+      </div>
+
+      <!-- Second Birthday video -->
+      <div class="Picture-video">
+        <video class="Picture-img-video" width="300" height="400" controls>
+          <source
+            src="WhatsApp Video 2025-08-30 at 14.34.30_c8f53427.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+        <div class="Picture-note-video">
+          <span>
+            SHE IS SHE IS TELLING A LIE🤭😂 HAPPIEST BIRTHDAY TO YOU
+            DOMLEEEEE!</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const pictures = document.querySelectorAll(".Picture, .Picture-video");
+      let previousTouch = undefined;
+      let animationIndex = 0;
+
+      const startOverlay = document.querySelector(".start-overlay");
+      const birthdayTitle = document.querySelector(".birthday-title");
+      const container = document.querySelector(".Container");
+
+      // Drag functionality
+      function updateElementPosition(element, event) {
+        var movementX, movementY;
+
+        if (event.type === "touchmove") {
+          const touch = event.touches[0];
+          movementX = previousTouch ? touch.clientX - previousTouch.clientX : 0;
+          movementY = previousTouch ? touch.clientY - previousTouch.clientY : 0;
+          previousTouch = touch;
+        } else {
+          movementX = event.movementX;
+          movementY = event.movementY;
+        }
+
+        const elementY = parseInt(element.style.top || 0) + movementY;
+        const elementX = parseInt(element.style.left || 0) + movementX;
+
+        element.style.top = elementY + "px";
+        element.style.left = elementX + "px";
+      }
+
+      function startDrag(element, event) {
+        const updateFunction = (event) => updateElementPosition(element, event);
+        const stopFunction = () =>
+          stopDrag({ update: updateFunction, stop: stopFunction });
+        document.addEventListener("mousemove", updateFunction);
+        document.addEventListener("touchmove", updateFunction);
+        document.addEventListener("mouseup", stopFunction);
+        document.addEventListener("touchend", stopFunction);
+      }
+
+      function stopDrag(functions) {
+        previousTouch = undefined;
+        document.removeEventListener("mousemove", functions.update);
+        document.removeEventListener("touchmove", functions.update);
+        document.removeEventListener("mouseup", functions.stop);
+        document.removeEventListener("touchend", functions.stop);
+      }
+
+      // Add drag functionality to all pictures
+      pictures.forEach((picture) => {
+        const startFunction = (event) => startDrag(picture, event);
+        picture.addEventListener("mousedown", startFunction);
+        picture.addEventListener("touchstart", startFunction);
+
+        // Hover animations
+        picture.addEventListener("mouseenter", () => {
+          gsap.to(picture, {
+            scale: 1.05,
+            rotation: "+=5",
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        });
+
+        picture.addEventListener("mouseleave", () => {
+          gsap.to(picture, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        });
+      });
+
+      // Store positions of placed cards
+      const placedPositions = [];
+
+      // Function to check if two rectangles overlap more than 30%
+      function getOverlapPercentage(rect1, rect2) {
+        const x_overlap = Math.max(
+          0,
+          Math.min(rect1.right, rect2.right) - Math.max(rect1.left, rect2.left)
+        );
+        const y_overlap = Math.max(
+          0,
+          Math.min(rect1.bottom, rect2.bottom) - Math.max(rect1.top, rect2.top)
+        );
+        const overlap_area = x_overlap * y_overlap;
+
+        const area1 = (rect1.right - rect1.left) * (rect1.bottom - rect1.top);
+        const area2 = (rect2.right - rect2.left) * (rect2.bottom - rect2.top);
+        const smaller_area = Math.min(area1, area2);
+
+        return overlap_area / smaller_area;
+      }
+
+      // Function to find valid position with max 30% overlap
+      function findValidPosition() {
+        let attempts = 0;
+        const maxAttempts = 50;
+
+        while (attempts < maxAttempts) {
+          const randomX =
+            Math.random() * (window.innerWidth - 400) -
+            (window.innerWidth / 2 - 200);
+          const randomY =
+            Math.random() * (window.innerHeight - 400) -
+            (window.innerHeight / 2 - 200);
+
+          const newRect = {
+            left: window.innerWidth / 2 + randomX - 150,
+            top: window.innerHeight / 2 + randomY - 150,
+            right: window.innerWidth / 2 + randomX + 150,
+            bottom: window.innerHeight / 2 + randomY + 150,
+          };
+
+          // Check overlap with all placed positions
+          let validPosition = true;
+          for (let placedRect of placedPositions) {
+            if (getOverlapPercentage(newRect, placedRect) > 0.3) {
+              validPosition = false;
+              break;
+            }
+          }
+
+          if (validPosition) {
+            placedPositions.push(newRect);
+            return { x: randomX, y: randomY };
+          }
+
+          attempts++;
+        }
+
+        // If no valid position found after max attempts, use a random position anyway
+        const fallbackX =
+          Math.random() * (window.innerWidth - 400) -
+          (window.innerWidth / 2 - 200);
+        const fallbackY =
+          Math.random() * (window.innerHeight - 400) -
+          (window.innerHeight / 2 - 200);
+
+        placedPositions.push({
+          left: window.innerWidth / 2 + fallbackX - 150,
+          top: window.innerHeight / 2 + fallbackY - 150,
+          right: window.innerWidth / 2 + fallbackX + 150,
+          bottom: window.innerHeight / 2 + fallbackY + 150,
+        });
+
+        return { x: fallbackX, y: fallbackY };
+      }
+
+      // Function to animate next photo
+      function animateNextPhoto() {
+        if (animationIndex >= pictures.length) return;
+
+        const pic = pictures[animationIndex];
+        const position = findValidPosition();
+        const randomRotation = Math.random() * 40 - 20;
+
+        // Animate from center to valid random position
+        gsap.to(pic, {
+          opacity: 1,
+          scale: 1,
+          x: position.x,
+          y: position.y,
+          rotation: randomRotation,
+          duration: 1.2,
+          ease: "back.out(1.4)",
+          onComplete: () => {
+            // If the animated element is a video card, attempt to play the video
+            if (pic.classList.contains("Picture-video")) {
+              const video = pic.querySelector("video");
+              if (video) {
+                // Attempt to play the video
+                video.play().catch((error) => {
+                  console.warn("Video autoplay was prevented:", error);
+                });
+              }
+            }
+
+            // Schedule next photo after a delay
+            setTimeout(() => {
+              animationIndex++;
+              animateNextPhoto();
+            }, 800);
+          },
+        });
+      }
+
+      function startExperience() {
+        // Hide overlay
+        gsap.to(startOverlay, {
+          opacity: 0,
+          duration: 0.5,
+          onComplete: () => {
+            startOverlay.style.display = "none";
+          },
+        });
+
+        // Make main content visible
+        birthdayTitle.style.visibility = "visible";
+        container.style.visibility = "visible";
+
+        // Show birthday title first, then start photo animations
+        gsap.to(".birthday-title", {
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
+          delay: 0.5,
+          onComplete: () => {
+            setTimeout(() => animateNextPhoto(), 1000);
+          },
+        });
+      }
+
+      startOverlay.addEventListener("click", startExperience);
+    </script>
+  </body>
+</html>
